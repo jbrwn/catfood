@@ -1,0 +1,7 @@
+.idea
+.DS_Store
+.gradle
+build
+ca/_ca
+env/*
+!env/gen-env-file.sh

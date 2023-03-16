@@ -1,0 +1,123 @@
+/**
+ * Theme
+ */
+[data-theme=light],
+:root:not([data-theme=dark]) {
+  --nav-background-color: rgba(255, 255, 255, 0.7);
+}
+@media only screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme=light]) {
+    --nav-background-color: rgba(16, 24, 30, 0.8);
+  }
+}
+[data-theme=dark] {
+  --nav-background-color: rgba(16, 24, 30, 0.8);
+}
+
+/**
+ * Primary nav
+ */
+body>nav {
+    box-shadow: 0 1px 0 rgba(115, 130, 140, 0.2);
+    z-index: 99;
+}
+body>nav.sticky {
+    position: fixed;
+    backdrop-filter: saturate(180%) blur(20px);
+    background-color: var(--nav-background-color);
+}
+
+/**
+ * Dashboard Main
+ */
+body > main.dashboard {
+    padding-top: calc(var(--block-spacing-vertical) + 2rem);
+}
+@media (min-width: 992px) {
+  body > main.dashboard {
+    display: grid;
+    grid-column-gap: var(--block-spacing-horizontal);
+    grid-template-columns: 150px auto;
+  }
+}
+body > main > aside,
+body > main div[role=document] {
+    min-width: 0;
+}
+
+/**
+ * Dashboard Aside
+ */
+main.dashboard > aside nav,
+main.dashboard > aside nav ul {
+    display: flex;
+}
+@media (min-width: 992px) {
+   main.dashboard > aside nav {
+     position: fixed;
+     width: 150px;
+  }
+  main.dashboard > aside nav,
+  main.dashboard > aside nav ul {
+    display: block
+  }
+}
+
+
+/**
+ * Dashboard Cards
+ */
+div[role=document] > article:first-of-type {
+  padding-top: 0;
+}
+
+
+/**
+ * Hero
+ */
+.hero { text-align: center }
+.hero h1 { font-size: 3em }
+
+/**
+ * Auth
+ */
+.container.auth { padding-top: 0 }
+@media (min-width: 576px) {
+  .container.auth {
+    max-width: 510px;
+  }
+}
+
+/**
+ * Dashboard Cards
+ */
+main.dashboard > article:first-of-type {
+  padding-top: 0;
+}
+
+/**
+ * Tables
+ */
+table.fixed {
+    table-layout: fixed;
+}
+
+/**
+ * Map
+ */
+#map {
+    width: 100%;
+    height: 400px;
+}
+@media (min-width: 576px) {
+    #map {
+        height: 500px;
+    }
+}
+@media (min-width: 992px) {
+    #map {
+        height: 600px;
+    }
+}
+
+

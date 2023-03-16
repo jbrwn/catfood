@@ -1,0 +1,22 @@
+services:
+  ca:
+    build:
+      context: .
+    environment:
+      CA_CATFOOD_ROOT_CA_KEY_PASSWORD: catfood
+      CA_CATFOOD_INTERMEDIATE_CA_1_KEY_PASSWORD: catfood
+    volumes:
+      - ./_ca:/ca
+      - ../env:/env
+    command:
+      - /bin/bash
+      - -c
+      - |
+        ./init-root.sh -d /ca -c US -o Catfood -n "Catfood Root CA" || true
+        ./init-intermediate.sh -d /ca/catfood-root-ca -c US -o Catfood -n "Catfood Intermediate CA 1" || true
+        ./create-cert.sh -t server_cert -d /ca/catfood-root-ca/catfood-intermediate-ca-1 -c US -o Catfood -n catfood.dog -n device.catfood.dog || true
+        /env/gen-env-file.sh -i ca/catfood-root-ca/catfood-intermediate-ca-1/certs/catfood-intermediate-ca-1.cert.pem -e CA_CERTIFICATE
+        /env/gen-env-file.sh -i ca/catfood-root-ca/catfood-intermediate-ca-1/private/catfood-intermediate-ca-1.key.pem -e CA_KEY
+        /env/gen-env-file.sh -i ca/catfood-root-ca/catfood-intermediate-ca-1/certs/catfood.dog-chain.cert.pem -e SSL_CERT
+        /env/gen-env-file.sh -i ca/catfood-root-ca/catfood-intermediate-ca-1/private/catfood.dog.key.pem -e SSL_KEY
+        /env/gen-env-file.sh -i ca/catfood-root-ca/catfood-intermediate-ca-1/certs/catfood-intermediate-ca-1-chain.cert.pem -e SSL_CLIENT_CERT

@@ -1,0 +1,50 @@
+services:
+  db:
+    image: postgres:alpine
+    environment:
+      POSTGRES_DB: catfood
+      POSTGRES_USER: catfood
+      POSTGRES_PASSWORD: catfood
+    ports:
+      - "6000:5432"
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6001:6379"
+
+  catfood:
+    build:
+      context: .
+    environment:
+      CA_PASSWORD: catfood
+      DB_HOST: db
+      DB_NAME: catfood
+      DB_PASSWORD: catfood
+      DB_PORT: 5432
+      DB_USER: catfood
+      REDIS_PASSWORD: ""
+      REDIS_URL: redis://redis:6379
+    env_file:
+      - env/CA_CERTIFICATE.env
+      - env/CA_KEY.env
+    ports:
+      - "6002:8080"
+    depends_on:
+      - db
+      - redis
+
+  proxy:
+    build:
+      context: proxy
+    environment:
+      CATFOOD_URL: http://catfood:8080
+    env_file:
+      - env/SSL_KEY.env
+      - env/SSL_CERT.env
+      - env/SSL_CLIENT_CERT.env
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - catfood
