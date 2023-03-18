@@ -7,6 +7,15 @@
 
 ## Test
 
+## Publish
+```bash
+fly auth docker
+docker build . -t registry.fly.io/catfood-app:latest
+docker push registry.fly.io/catfood-app:latest
+fly deploy
+```
+
+
 ## Run Locally
 Build local certificate authority and create env files.
 ```bash

@@ -55,6 +55,7 @@ import io.ktor.server.application.install
 import io.ktor.server.auth.Authentication
 import io.ktor.server.auth.session
 import io.ktor.server.config.ApplicationConfig
+import io.ktor.server.engine.commandLineEnvironment
 import io.ktor.server.freemarker.FreeMarker
 import io.ktor.server.http.content.resources
 import io.ktor.server.http.content.static
@@ -83,6 +84,7 @@ import io.r2dbc.spi.ConnectionFactoryOptions.PROTOCOL
 import io.r2dbc.spi.ConnectionFactoryOptions.USER
 import no.api.freemarker.java8.Java8ObjectWrapper
 import no.api.freemarker.java8.time.DefaultFormatters
+import org.flywaydb.core.Flyway
 import org.jooq.impl.DSL
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -96,7 +98,27 @@ import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import kotlin.reflect.typeOf
 
-fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
+fun main(args: Array<String>) {
+    if (args.isNotEmpty() && args[0] == "migrate") {
+        val config = commandLineEnvironment(args.copyOfRange(1, args.size))
+            .config
+        val host = config.get("db.host")
+        val port = config.get("db.port")
+        val name = config.get("db.name")
+        val user = config.get("db.user")
+        val password = config.get("db.password")
+        Flyway.configure()
+            .dataSource(
+                "jdbc:postgresql://$host:$port/$name?sslmode=disable",
+                user,
+                password
+            )
+            .load()
+            .migrate()
+    } else {
+        io.ktor.server.netty.EngineMain.main(args)
+    }
+}
 
 fun Application.main() {
     install(CallLogging)

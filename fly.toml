@@ -5,7 +5,17 @@ kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
 
+[build]
+  image = "registry.fly.io/catfood-app:latest"
+
+[deploy]
+  release_command = "java -jar app.jar migrate"
+
 [env]
+  DB_HOST = "catfood-db.flycast"
+  DB_PORT = "5432"
+  DB_NAME = "catfood_app"
+  REDIS_URL = "redis://fly-catfood-redis.upstash.io:6379"
 
 [experimental]
   auto_rollback = true

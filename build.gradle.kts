@@ -10,7 +10,8 @@ plugins {
 }
 
 application {
-    mainClass.set("io.ktor.server.netty.EngineMain")
+//    mainClass.set("io.ktor.server.netty.EngineMain")
+    mainClass.set("dog.catfood.ApplicationKt")
 }
 
 repositories {
@@ -46,6 +47,7 @@ dependencies {
     implementation("org.jooq:jooq-kotlin-coroutines:3.17.7")
     implementation("io.r2dbc:r2dbc-pool:1.0.0.RELEASE")
     implementation("org.postgresql:r2dbc-postgresql:1.0.0.RELEASE")
+    implementation("org.postgresql:postgresql:42.5.3")
     jooqGenerator("org.postgresql:postgresql:42.5.3")
     flywayMigration("org.postgresql:postgresql:42.5.3")
     testImplementation(kotlin("test"))
