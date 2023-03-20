@@ -32,11 +32,12 @@ The following env vars must be set.  Update accordingly if you modify the defaul
 CA_KEY=ca/_ca/catfood-root-ca/catfood-intermediate-ca-1/private/catfood-intermediate-ca-1.key.pem
 CA_CERTIFICATE=ca/_ca/catfood-root-ca/catfood-intermediate-ca-1/certs/catfood-intermediate-ca-1.cert.pem
 CA_PASSWORD=catfood
-DB_HOST=localhost
-DB_NAME=catfood
-DB_PASSWORD=catfood
-DB_PORT=6000
-DB_USER=catfood
+DB_APP_PASSWORD=catfood
+DB_APP_URL=r2dbc:pool:postgresql://localhost:6000/catfood?maxIdleTime=PT60S
+DB_APP_USER=catfood
+DB_MIGRATION_PASSWORD=catfood
+DB_MIGRATION_URL=jdbc:postgresql://localhost:6000/catfood?sslmode=disable
+DB_MIGRATION_USER=catfood
 DEVELOPMENT=true
 REDIS_PASSWORD=
 REDIS_URL=redis://localhost:6001

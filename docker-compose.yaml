@@ -18,11 +18,12 @@ services:
       context: .
     environment:
       CA_PASSWORD: catfood
-      DB_HOST: db
-      DB_NAME: catfood
-      DB_PASSWORD: catfood
-      DB_PORT: 5432
-      DB_USER: catfood
+      DB_MIGRATION_URL: jdbc:postgresql://db:5432/catfood?sslmode=disable
+      DB_MIGRATION_USER: catfood
+      DB_MIGRATION_PASSWORD: catfood
+      DB_APP_URL: r2dbc:pool:postgresql://db:5432/catfood?maxIdleTime=PT60S
+      DB_APP_USER: catfood
+      DB_APP_PASSWORD: catfood
       REDIS_PASSWORD: ""
       REDIS_URL: redis://redis:6379
     env_file:

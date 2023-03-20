@@ -12,10 +12,9 @@ processes = []
   release_command = "java -jar app.jar migrate"
 
 [env]
-  DB_HOST = "catfood-db.flycast"
-  DB_PORT = "5432"
-  DB_NAME = "catfood_app"
   REDIS_URL = "redis://fly-catfood-redis.upstash.io:6379"
+  DB_MIGRATION_URL = "jdbc:postgresql://catfood-db.flycast:5432/catfood_app?sslmode=disable"
+  DB_APP_URL = "r2dbc:pool:postgresql://catfood-db.flycast:5432/catfood_app?maxIdleTime=PT60S"
 
 [experimental]
   auto_rollback = true

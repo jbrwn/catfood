@@ -7,11 +7,14 @@ ktor:
       - dog.catfood.ApplicationKt.main
 
 db:
-  host: "$DB_HOST"
-  port: "$DB_PORT"
-  name: "$DB_NAME"
-  user: "$DB_USER"
-  password: "$DB_PASSWORD"
+  migration:
+    url: "$DB_MIGRATION_URL"
+    user: "$DB_MIGRATION_USER"
+    password: "$DB_MIGRATION_PASSWORD"
+  app:
+    url: "$DB_APP_URL"
+    user: "$DB_APP_USER"
+    password: "$DB_APP_PASSWORD"
 
 redis:
   url: "$REDIS_URL"
