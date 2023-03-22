@@ -1,0 +1,19 @@
+# fly.toml file generated for catfood-certbot on 2023-03-21T11:35:13-06:00
+
+app = "catfood-certbot"
+kill_signal = "SIGINT"
+kill_timeout = 5
+primary_region = "den"
+processes = []
+
+[build]
+  image = "registry.fly.io/catfood-certbot:latest"
+
+[env]
+
+[experimental]
+  auto_rollback = true
+
+[mounts]
+  source="certbot_data"
+  destination="/etc/letsencrypt"

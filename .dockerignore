@@ -6,3 +6,4 @@ fly.toml
 ca/_ca
 env/*
 !env/gen-env-file.sh
+certbot/letsencrypt

@@ -1,0 +1,10 @@
+services:
+  certbot:
+    build:
+      context: .
+    environment:
+      LETSENCRYPT_ACCOUNT_EMAIL: <email>
+      GOOGLE_DOMAINS_ACCESS_TOKEN: <token>
+      DOPPLER_TOKEN: <token>
+    volumes:
+      - ./letsencrypt:/etc/letsencrypt

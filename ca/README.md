@@ -6,7 +6,6 @@ cd ca
 fly auth docker
 docker build . -t registry.fly.io/catfood-ca:latest
 docker push registry.fly.io/catfood-ca:latest
-fly deploy
 ```
 ## Spin Up a Container
 Create the fly.io machine
