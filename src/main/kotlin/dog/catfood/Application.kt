@@ -143,6 +143,7 @@ fun Application.main() {
         static("/assets") {
             staticBasePackage = "assets"
             static("css") { resources("css") }
+            static("img") { resources("img") }
         }
         // app
         route("/") {

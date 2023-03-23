@@ -21,10 +21,28 @@ body>nav {
     box-shadow: 0 1px 0 rgba(115, 130, 140, 0.2);
     z-index: 99;
 }
+body > nav ul:first-of-type li {
+    padding: 0;
+}
 body>nav.sticky {
     position: fixed;
     backdrop-filter: saturate(180%) blur(20px);
     background-color: var(--nav-background-color);
+}
+body > nav ul:first-of-type li:first-of-type a {
+    display: block;
+    margin: 0;
+    padding: 0;
+    color: var(--h1-color);
+}
+body > nav ul:first-of-type li:first-of-type a svg {
+    display: block;
+    width: 1.75rem;
+    height: 1.75rem;
+}
+body > nav ul:first-of-type li:nth-of-type(2) {
+    margin-left: calc(var(--spacing) * 1.5);
+    color: var(--h1-color);
 }
 
 /**
