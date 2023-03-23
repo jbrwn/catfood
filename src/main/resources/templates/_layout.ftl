@@ -1,5 +1,6 @@
 <#macro head>
 <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Catfood</title>
     <link rel="stylesheet" href="/assets/css/pico.min.css"/>
     <link rel="stylesheet" href="/assets/css/custom.css"/>
